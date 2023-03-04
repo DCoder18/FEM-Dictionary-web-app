@@ -547,6 +547,10 @@ video {
   margin-right: 1.25rem;
 }
 
+.ml-5 {
+  margin-left: 1.25rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -575,6 +579,14 @@ video {
   height: 100%;
 }
 
+.h-\[75px\] {
+  height: 75px;
+}
+
+.h-\[1px\] {
+  height: 1px;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -595,8 +607,28 @@ video {
   width: 100%;
 }
 
+.w-\[75px\] {
+  width: 75px;
+}
+
+.min-w-\[75px\] {
+  min-width: 75px;
+}
+
+.max-w-\[75px\] {
+  max-width: 75px;
+}
+
+.list-disc {
+  list-style-type: disc;
+}
+
 .items-center {
   align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
@@ -605,6 +637,24 @@ video {
 
 .gap-5 {
   gap: 1.25rem;
+}
+
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .rounded-2xl {
@@ -635,6 +685,15 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-purple {
+  --tw-bg-opacity: 1;
+  background-color: rgb(164 69 237 / var(--tw-bg-opacity));
+}
+
+.bg-purple\/25 {
+  background-color: rgb(164 69 237 / 0.25);
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -657,6 +716,54 @@ video {
   padding-top: 3rem;
 }
 
+.pb-11 {
+  padding-bottom: 2.75rem;
+}
+
+.pt-11 {
+  padding-top: 2.75rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
+.pl-6 {
+  padding-left: 1.5rem;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
+.pl-7 {
+  padding-left: 1.75rem;
+}
+
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -667,13 +774,71 @@ video {
   line-height: 1.75rem;
 }
 
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .font-bold {
   font-weight: 700;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.text-purple {
+  --tw-text-opacity: 1;
+  color: rgb(164 69 237 / var(--tw-text-opacity));
+}
+
+.text-grey-300 {
+  --tw-text-opacity: 1;
+  color: rgb(117 117 117 / var(--tw-text-opacity));
+}
+
+.text-black-200 {
+  --tw-text-opacity: 1;
+  color: rgb(45 45 45 / var(--tw-text-opacity));
+}
+
+.opacity-25 {
+  opacity: 0.25;
 }
 
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.marker\:pr-3 *::marker {
+  padding-right: 0.75rem;
+}
+
+.marker\:text-purple *::marker {
+  color: rgb(164 69 237 );
+}
+
+.marker\:pr-3::marker {
+  padding-right: 0.75rem;
+}
+
+.marker\:text-purple::marker {
+  color: rgb(164 69 237 );
 }
 
 .placeholder\:text-black-200::-moz-placeholder {
@@ -692,4 +857,16 @@ video {
 
 .placeholder\:opacity-25::placeholder {
   opacity: 0.25;
+}
+
+@media (min-width: 700px) {
+  .md\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
