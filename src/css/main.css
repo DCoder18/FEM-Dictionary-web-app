@@ -662,6 +662,11 @@ video {
   line-height: 1.75rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -669,4 +674,22 @@ video {
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.placeholder\:text-black-200::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(45 45 45 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-black-200::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(45 45 45 / var(--tw-text-opacity));
+}
+
+.placeholder\:opacity-25::-moz-placeholder {
+  opacity: 0.25;
+}
+
+.placeholder\:opacity-25::placeholder {
+  opacity: 0.25;
 }
