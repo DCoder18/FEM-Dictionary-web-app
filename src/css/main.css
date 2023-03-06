@@ -890,6 +890,15 @@ video {
   opacity: 0.25;
 }
 
+.focus-within\:border:focus-within {
+  border-width: 1px;
+}
+
+.focus-within\:border-purple:focus-within {
+  --tw-border-opacity: 1;
+  border-color: rgb(164 69 237 / var(--tw-border-opacity));
+}
+
 .hover\:border:hover {
   border-width: 1px;
 }
