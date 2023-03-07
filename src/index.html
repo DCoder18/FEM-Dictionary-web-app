@@ -71,13 +71,13 @@
       <div x-data="{searched_word: ''}" class="w-full h-14 bg-grey-100 rounded-2xl px-6 flex gap-5 hover:border hover:border-purple focus-within:border focus-within:border-purple caret-purple transition-all">
         <input
         x-model="searched_word"
-        @keyup.enter="getData"
+        @keyup.enter="populateData"
         class="w-full h-full bg-grey-100 outline-none text-xl placeholder:text-black-200 placeholder:opacity-25"
         type="text"
         placeholder="Search for any word...">
 
         <img
-        @click="getData"
+        @click="populateData"
         class="w-4"
         src="assets/images/icon-search.svg" alt="">
       </div>
@@ -88,8 +88,8 @@
         <!-- Pronounciation -->
         <div class="flex justify-between items-center pb-10">
           <div>
-            <h1 x-ref="title" class="text-3xl md:text-6xl pb-3 font-bold"></h1>
-            <p class="text-lg md:text-2xl text-purple font-normal">/ˈkiːbɔːd/</p>
+            <h1 x-ref="word" class="text-3xl md:text-6xl pb-3 font-bold"></h1>
+            <p x-ref="phonetic" class="text-lg md:text-2xl text-purple font-normal">/ˈkiːbɔːd/</p>
           </div>
          
           <div class="group cursor-pointer">
@@ -159,6 +159,7 @@
       Alpine.data('content', () => ({
         font: 'sans',
 
+
         updateFont(font) {
           const elWrapper = this.$refs.wrapper
           const elSelected = this.$refs.selected_font
@@ -190,18 +191,47 @@
           }
         },
 
-        async getData() {
+        async populateData() {
           const url = "https://api.dictionaryapi.dev/api/v2/entries/en/"
           const query = `${url}${this.searched_word}`
+          const refsArr = ['word', 'phonetic']
 
           const res = await fetch(query)
           let wordObj = await res.json()
           wordObj = wordObj[0]
 
-          const title = wordObj['word']
-          this.$refs.title.
+          refsArr.forEach(el => {
+            refQuery = this.$refs + `.` + `${el}`
+            refQuery.innerText = wordObj[el]
+            // this.$refs + `.${el}` + `innerText`
+            // this.$refs.el.innerText = wordObj[el]
+            console.log(refQuery)
+            // console.log(this.$refs + `.${el}`)
+          })
+       
+        },
 
-        }
+        // populate(wordObj, el) {
+        //   const el = $refs.el
+        //   console.log(wordObj)
+        //   const title = 
+        //   $refs.text.innerText = title
+        // },
+
+       
+
+      
+
+        // populateData('title')
+
+        // async populateData(el) {
+        //   let data = await this.fetchData()
+        //   console.log(data['word'])
+
+        //   let returnedData = data[el]
+        //   return returnedData
+        // },
+        
       }))
     })
   </script>
