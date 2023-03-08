@@ -922,15 +922,6 @@ video {
   color: rgb(164 69 237 / var(--tw-text-opacity));
 }
 
-.focus\:border:focus {
-  border-width: 1px;
-}
-
-.focus\:border-purple:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(164 69 237 / var(--tw-border-opacity));
-}
-
 .group:hover .group-hover\:block {
   display: block;
 }
