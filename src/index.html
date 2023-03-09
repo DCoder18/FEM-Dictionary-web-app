@@ -66,91 +66,102 @@
     </header>
 
     <main>
-
       <!-- Search -->
-      <div x-data="{searched_word: ''}" class="w-full h-14 bg-grey-100 rounded-2xl px-6 flex gap-5 hover:border hover:border-purple focus-within:border focus-within:border-purple caret-purple transition-all">
-        <input
-        x-model="searched_word"
-        @keyup.enter="populateData"
-        class="w-full h-full bg-grey-100 outline-none text-xl placeholder:text-black-200 placeholder:opacity-25"
-        type="text"
-        placeholder="Search for any word...">
+      <div
+      x-cloak
+      x-data = "{word: []}"
+      x-init="getWordData()">
+        <div x-data="{searched_word: ''}"class="w-full h-14 bg-grey-100 rounded-2xl px-6 flex gap-5 hover:border hover:border-purple focus-within:border focus-within:border-purple caret-purple transition-all">
+          <input
+          x-model="searched_word"
+          @keyup.enter="getWordData()"
+          class="w-full h-full bg-grey-100 outline-none text-xl placeholder:text-black-200 placeholder:opacity-25"
+          type="text"
+          placeholder="Search for any word...">
 
-        <img
-        @click="populateData"
-        class="w-4"
-        src="assets/images/icon-search.svg" alt="">
-      </div>
+          <img
+          @click="getWordData()"
+          class="w-4"
+          src="assets/images/icon-search.svg" alt="">
+        </div>
 
-      <!-- Result -->
-      <div class="pt-11">
+        <!-- Result -->
+          <div class="pt-11">
 
-        <!-- Pronounciation -->
-        <div class="flex justify-between items-center pb-10">
-          <div>
-            <h1 x-ref="word" class="text-3xl md:text-6xl pb-3 font-bold"></h1>
-            <p x-ref="phonetic" class="text-lg md:text-2xl text-purple font-normal">/ˈkiːbɔːd/</p>
-          </div>
-         
-          <div class="group cursor-pointer">
-            <div class="group-hover:bg-purple transition-all flex w-[75px] h-[75px] justify-center rounded-full bg-purple/25 items-center">
-              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path class="group-hover:fill-white" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V21L21 10.5L0 0Z" fill="#A445ED"/>
-              </svg>
+            <!-- Pronounciation -->
+            <div class="flex justify-between items-center pb-10">
+                <div>
+                  <h1 x-text="word.word" class="text-3xl md:text-6xl pb-3 font-bold"></h1>
+                  <p x-text="word.phonetics[1].text" class="text-lg md:text-2xl text-purple font-normal"></p>
+                </div>
+              <div class="group cursor-pointer">
+                <div class="group-hover:bg-purple transition-all flex w-[75px] h-[75px] justify-center rounded-full bg-purple/25 items-center">
+                  <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="group-hover:fill-white" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V21L21 10.5L0 0Z" fill="#A445ED"/>
+                  </svg>
+                </div>
+              </div>
+              
+            </div>
+  
+            <!-- Noun -->
+            <div class="flex items-center pb-10">
+              <h2 class="font-bold italic text-2xl">noun</h2>
+              <div class="h-[1px] w-full bg-grey-200 ml-5"></div> <!-- Divider -->
+            </div>
+           
+            <!-- Meaning -->
+            <div class="pb-10">
+              <h3 class="text-grey-300 text-xl pb-6">Meaning</h3>
+              <ul class="marker:text-purple list-disc pl-7 space-y-2 text-black-200 text-lg">
+                <template x-for="meaning in word.meanings[0].definitions">
+                  <li x-text="meaning.definition" class="pl-3"></li>
+                </template>
+              </ul>
+            </div>
+  <!-- 0.meanings[0].synonyms -->
+            <!-- Synonyms -->
+            <div class="flex gap-5 pb-10">
+              <h3 class="text-grey-300 text-xl">Synonyms</h3>
+
+              <template x-for="">
+                <span x-text="word.meanings[0].synonyms" class="text-purple font-bold text-xl hover:border-b-[1px] cursor-pointer transition-all"></span>
+              </template>
+              
+              <p x-text="word.meanings[0].synonyms" class="text-purple font-bold text-xl hover:border-b-[1px] cursor-pointer transition-all"></p>
+            </div>
+  
+            <!-- Verb -->
+            <div class="flex items-center pb-10">
+              <h2 class="font-bold italic text-2xl">verb</h2>
+              <div class="h-[1px] w-full bg-grey-200 ml-5"></div> <!-- Divider -->
+            </div>
+  
+            <!-- Meaning -->
+            <div class="pb-10">
+              <h3 class="text-grey-300 text-xl pb-6">Meaning</h3>
+              <ul class="marker:text-purple list-disc pl-7 space-y-2 text-black-200 text-lg">
+                <li class="pl-3">
+                <p>To type on a computer keyboard.</p>
+                <p class="text-grey-300 pt-3">"Keyboarding is the part of this job I hate the most."</p>
+                </li>
+              </ul>
+            </div>
+            <div class="h-[1px] w-full bg-grey-200"></div> <!-- Divider -->
+  
+            <!-- Source -->
+            <div class="block md:flex gap-5 pt-5 text-sm">
+              <h3 class="underline text-grey-300 decoration-grey-300 underline-offset-4">Source</h3>
+              <a class="underline text-black-200 decoration-black-200 underline-offset-4" href="#">
+                https://en.wiktionary.org/wiki/keyboard
+                <span><img class="inline-block pl-3" src="assets/images/icon-new-window.svg" alt=""></span>
+              </a>
             </div>
           </div>
-          
-        </div>
-
-        <!-- Noun -->
-        <div class="flex items-center pb-10">
-          <h2 class="font-bold italic text-2xl">noun</h2>
-          <div class="h-[1px] w-full bg-grey-200 ml-5"></div> <!-- Divider -->
-        </div>
-
-        <!-- Meaning -->
-        <div class="pb-10">
-          <h3 class="text-grey-300 text-xl pb-6">Meaning</h3>
-          <ul class="marker:text-purple list-disc pl-7 space-y-2 text-black-200 text-lg">
-            <li class="pl-3">(etc.) A set of keys used to operate a typewriter, computer etc.</li>
-            <li class="pl-3">A component of many instruments including the piano, organ, and harpsichord consisting of usually black and white keys that cause different tones to be produced when struck.</li>
-            <li class="pl-3">A device with keys of a musical keyboard, used to control electronic sound-producing devices which may be built into or separate from the keyboard device.</li>
-          </ul>
-        </div>
-
-        <!-- Synonyms -->
-        <div class="flex gap-5 pb-10">
-          <h3 class="text-grey-300 text-xl">Synonyms</h3>
-          <p class="text-purple font-bold text-xl hover:border-b-[1px] cursor-pointer transition-all">electronic keyboard</p>
-        </div>
-
-        <!-- Verb -->
-        <div class="flex items-center pb-10">
-          <h2 class="font-bold italic text-2xl">verb</h2>
-          <div class="h-[1px] w-full bg-grey-200 ml-5"></div> <!-- Divider -->
-        </div>
-
-        <!-- Meaning -->
-        <div class="pb-10">
-          <h3 class="text-grey-300 text-xl pb-6">Meaning</h3>
-          <ul class="marker:text-purple list-disc pl-7 space-y-2 text-black-200 text-lg">
-            <li class="pl-3">
-             <p>To type on a computer keyboard.</p>
-            <p class="text-grey-300 pt-3">"Keyboarding is the part of this job I hate the most."</p>
-            </li>
-          </ul>
-        </div>
-        <div class="h-[1px] w-full bg-grey-200"></div> <!-- Divider -->
-
-        <!-- Source -->
-        <div class="block md:flex gap-5 pt-5 text-sm">
-          <h3 class="underline text-grey-300 decoration-grey-300 underline-offset-4">Source</h3>
-          <a class="underline text-black-200 decoration-black-200 underline-offset-4" href="#">
-            https://en.wiktionary.org/wiki/keyboard
-            <span><img class="inline-block pl-3" src="assets/images/icon-new-window.svg" alt=""></span>
-          </a>
-        </div>
+       
+      
       </div>
+
     </main>
   </div>
   
@@ -191,47 +202,14 @@
           }
         },
 
-        async populateData() {
+        getWordData() {
           const url = "https://api.dictionaryapi.dev/api/v2/entries/en/"
-          const query = `${url}${this.searched_word}`
-          const refsArr = ['word', 'phonetic']
+          const q = `${url}${this.searched_word ?? 'hello'}`
 
-          const res = await fetch(query)
-          let wordObj = await res.json()
-          wordObj = wordObj[0]
-
-          refsArr.forEach(el => {
-            refQuery = this.$refs + `.` + `${el}`
-            refQuery.innerText = wordObj[el]
-            // this.$refs + `.${el}` + `innerText`
-            // this.$refs.el.innerText = wordObj[el]
-            console.log(refQuery)
-            // console.log(this.$refs + `.${el}`)
-          })
-       
-        },
-
-        // populate(wordObj, el) {
-        //   const el = $refs.el
-        //   console.log(wordObj)
-        //   const title = 
-        //   $refs.text.innerText = title
-        // },
-
-       
-
-      
-
-        // populateData('title')
-
-        // async populateData(el) {
-        //   let data = await this.fetchData()
-        //   console.log(data['word'])
-
-        //   let returnedData = data[el]
-        //   return returnedData
-        // },
-        
+          fetch(q)
+          .then((response) => response.json())
+          .then((json) => this.word = json[0]);
+        }
       }))
     })
   </script>
