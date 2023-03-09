@@ -70,7 +70,7 @@
       <div
       x-cloak
       x-data = "{word: []}"
-      x-init="getWordData()">
+      x-init="getWordData('happiness')">
         <div x-data="{searched_word: ''}"class="w-full h-14 bg-grey-100 rounded-2xl px-6 flex gap-5 hover:border hover:border-purple focus-within:border focus-within:border-purple caret-purple transition-all">
           <input
           x-model="searched_word"
@@ -119,16 +119,14 @@
                 </template>
               </ul>
             </div>
-  <!-- 0.meanings[0].synonyms -->
+            
             <!-- Synonyms -->
             <div class="flex gap-5 pb-10">
               <h3 class="text-grey-300 text-xl">Synonyms</h3>
 
-              <template x-for="">
-                <span x-text="word.meanings[0].synonyms" class="text-purple font-bold text-xl hover:border-b-[1px] cursor-pointer transition-all"></span>
+              <template x-for="synonym in word.meanings[0].synonyms">
+                <span @click="getWordData(synonym)" x-text="synonym" class="text-purple font-bold text-xl hover:border-b-[1px] cursor-pointer transition-all"></span>
               </template>
-              
-              <p x-text="word.meanings[0].synonyms" class="text-purple font-bold text-xl hover:border-b-[1px] cursor-pointer transition-all"></p>
             </div>
   
             <!-- Verb -->
@@ -170,7 +168,6 @@
       Alpine.data('content', () => ({
         font: 'sans',
 
-
         updateFont(font) {
           const elWrapper = this.$refs.wrapper
           const elSelected = this.$refs.selected_font
@@ -202,9 +199,9 @@
           }
         },
 
-        getWordData() {
-          const url = "https://api.dictionaryapi.dev/api/v2/entries/en/"
-          const q = `${url}${this.searched_word ?? 'hello'}`
+        getWordData(path) {
+          const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
+          const q = `${url}${this.searched_word ?? path}`
 
           fetch(q)
           .then((response) => response.json())
