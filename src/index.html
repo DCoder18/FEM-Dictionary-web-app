@@ -7,6 +7,7 @@
   <title>Dictionary Web App</title>
 
   <link rel="stylesheet" href="css/main.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body
 x-data="{ toggleDarkMode: false }"
@@ -94,13 +95,13 @@ x-data="{ toggleDarkMode: false }"
             <div class="flex justify-between items-center pb-10">
               <div>
                 <h1 x-text="word.word" class="text-3xl md:text-6xl pb-3 font-bold"></h1>
-                <p x-text="word.phonetics[1].text" class="text-lg md:text-2xl text-purple font-normal"></p>
+                <p x-text="word.phonetics?.[1].text" class="text-lg md:text-2xl text-purple font-normal"></p>
               </div>
 
               
                 <div  class="group cursor-pointer">
                   <div @click="$refs.audio.play()" class="group-hover:bg-purple transition-all duration-300 flex w-[75px] h-[75px] justify-center rounded-full bg-purple/25 items-center">
-                    <audio x-ref="audio" :src="word.phonetics[0].audio"></audio>
+                    <audio x-ref="audio" :src="word.phonetics?.[0].audio"></audio>
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path class="group-hover:fill-white" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V21L21 10.5L0 0Z" fill="#A445ED"/>
                     </svg>
@@ -118,7 +119,7 @@ x-data="{ toggleDarkMode: false }"
             <div class="pb-10">
               <h3 class="text-grey-300 text-xl pb-6">Meaning</h3>
               <ul class="marker:text-purple list-disc pl-7 space-y-2 text-black-200 text-lg">
-                <template x-for="meaningNoun in word.meanings[0].definitions">
+                <template x-for="meaningNoun in word.meanings?.[0].definitions">
                   <li x-text="meaningNoun.definition" class="pl-3" :class="toggleDarkMode ? 'dark:text-white' : ''"></li>
                 </template>
               </ul>
@@ -129,7 +130,7 @@ x-data="{ toggleDarkMode: false }"
               <h3 class="text-grey-300 text-xl">Synonyms</h3>
 
               <div class="flex flex-wrap gap-x-3">
-                <template x-for="synonym in word.meanings[0].synonyms">
+                <template x-for="synonym in word.meanings?.[0].synonyms">
                   <div @click="getWordData(synonym)" x-text="synonym" class="text-purple font-bold text-xl hover:border-b-[1px] cursor-pointer transition-colors duration-500"></div>
                 </template>
               </div>
@@ -146,7 +147,7 @@ x-data="{ toggleDarkMode: false }"
             <div class="pb-10">
               <h3 class="text-grey-300 text-xl pb-6">Meaning</h3>
               <ul class="marker:text-purple list-disc pl-7 space-y-2 text-black-200 text-lg">
-                <template x-for="meaningVerb in word.meanings[1].definitions">
+                <template x-for="meaningVerb in word.meanings?.[1].definitions">
                   <li class="pl-3">
                     <p x-text="meaningVerb.definition">To type on a computer keyboard.</p>
                     <div x-show="'example' in meaningVerb">
@@ -214,14 +215,15 @@ x-data="{ toggleDarkMode: false }"
           const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
           const q = `${url}${this.searched_word ?? path}`
 
-          fetch(q)
-          .then((response) => response.json())
-          .then((json) => this.word = json[0]);
-        }
+         
+            fetch(q)
+            .then((response) => response.json())
+            .then((json) => this.word = json[0]);
+          }
+
+          // console.log(word);
       }))
     })
   </script>
-  
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
