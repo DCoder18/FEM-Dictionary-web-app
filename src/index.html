@@ -78,7 +78,8 @@ x-data="{ toggleDarkMode: false }"
           <input
           x-model="searched_word"
           @keyup.enter="getWordData()"
-          class="w-full h-full bg-grey-100 outline-none text-xl placeholder:text-black-200 placeholder:opacity-25"
+          :class="toggleDarkMode ? 'dark:text-black-400' : ''"
+          class="w-full h-full bg-grey-100 outline-none text-xl placeholder:opacity-25"
           type="text"
           placeholder="Search for any word...">
 
@@ -148,7 +149,7 @@ x-data="{ toggleDarkMode: false }"
               <h3 class="text-grey-300 text-xl pb-6">Meaning</h3>
               <ul class="marker:text-purple list-disc pl-7 space-y-2 text-black-200 text-lg">
                 <template x-for="meaningVerb in word.meanings?.[1].definitions">
-                  <li class="pl-3">
+                  <li class="pl-3" :class="toggleDarkMode ? 'dark:text-white' : ''">
                     <p x-text="meaningVerb.definition">To type on a computer keyboard.</p>
                     <div x-show="'example' in meaningVerb">
                       <p class="text-grey-300">
@@ -164,7 +165,7 @@ x-data="{ toggleDarkMode: false }"
             <!-- Source -->
             <div class="block md:flex gap-5 pt-5 text-sm">
               <h3 class="underline text-grey-300 decoration-grey-300 underline-offset-4">Source</h3>
-              <a class="underline text-black-200 decoration-black-200 underline-offset-4" :href="'https://en.wiktionary.org/wiki/' + word.word">
+              <a :class="toggleDarkMode ? 'dark:text-white' : ''" class="underline text-black-200 decoration-black-200 underline-offset-4" :href="'https://en.wiktionary.org/wiki/' + word.word">
                 <span x-text="'https://en.wiktionary.org/wiki/' + word.word"></span>
                 <span><img class="inline-block pl-3" src="assets/images/icon-new-window.svg" alt=""></span>
               </a>
