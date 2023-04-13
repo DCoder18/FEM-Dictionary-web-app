@@ -186,26 +186,17 @@ x-data="{ toggleDarkMode: false }"
 
           switch (font) {
             case 'sans':
-              elWrapper.classList.add('font-sans')
-              elWrapper.classList.remove('font-serif')
-              elWrapper.classList.remove('font-mono')
-
+              elWrapper.style.fontFamily = "'Inter', sans-serif"
               elSelected.innerText = 'Sans Serif'
             break;
 
             case 'serif':
-              elWrapper.classList.remove('font-sans')
-              elWrapper.classList.add('font-serif')
-              elWrapper.classList.remove('font-mono')
-
+              elWrapper.style.fontFamily = "'Lora', serif"
               elSelected.innerText = 'Serif'
             break;
 
             case 'mono':
-              elWrapper.classList.remove('font-sans')
-              elWrapper.classList.remove('font-serif')
-              elWrapper.classList.add('font-mono')
-
+              elWrapper.style.fontFamily = "'Inconsolata', mono"
               elSelected.innerText = 'Mono'
             break;
           }
